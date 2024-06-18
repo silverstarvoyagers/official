@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silver Star Voyagers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        .navbar {
+            padding-left: 150px;
+            padding-right: 150px;
+            background-color: #1a1a1aec;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            transition: top 0.3s;
+            /* 過場動畫屬性 */
+        }
+
+
+        .navbar-brand,
+        .navbar-nav .nav-link {
+            color: #ffffff !important;
+        }
+
+        .navbar-nav .nav-item+.nav-item {
+            margin-left: 20px;
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar {
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .navbar-nav .nav-item+.nav-item {
+                margin-left: 0;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar-nav .nav-item {
+                margin-bottom: 10px;
+                /* 新增：在小屏幕下選項之間增加距離 */
+            }
+
+            .navbar-nav .nav-link {
+                padding: 10px 20px;
+                /* 調整：在小屏幕下增加選項的內邊距 */
+            }
+        }
+
+        .navbar-nav {
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .navbar-nav .nav-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            text-align: center;
+        }
+
+        .navbar-nav .nav-link {
+            position: relative;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+            background-color: transparent;
+            white-space: nowrap;
+            display: block;
+            padding: 10px 0;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .nav-link::before,
+        .nav-link::after {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            transition: opacity 0.3s ease-in-out;
+            opacity: 1;
+            text-align: center;
+        }
+
+        .nav-link::before {
+            content: attr(data-chinese);
+            color: #ffffff;
+        }
+
+        .nav-link::after {
+            content: attr(data-english);
+            color: transparent;
+            opacity: 0;
+        }
+
+        .nav-link:hover::before {
+            color: transparent;
+            opacity: 0;
+        }
+
+        .nav-link:hover::after {
+            color: #ffffff;
+            opacity: 1;
+        }
+
+        .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.6);
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba%28255, 255, 255, 0.6%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+        }
+
+        #home {
+            width: 100vw;
+            height: 100vh;
+            background-image: url('img/earth.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        #home .col-8 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        #concept {
+            width: 100vw;
+            height: 100vh;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #fff;
+        }
+
+        #concept .col-8 {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: left;
+        }
+
+        .et {
+            width: 100vw;
+            height: auto;
+            display: flex;
+        }
+
+        #features {
+            height: 100vh;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #features .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        #features .card {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #features .card-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #productline {
+            height: 100vh;
+            background-color: rgb(243, 255, 116);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-img-top:hover {
+            transform: scale(1.1);
+            transition: 0.5s;
+        }
+
+        .car {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #news {
+            height: 100vh;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .news {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #aboutus {
+            height: 100vh;
+        }
+
+        .footer {
+            height: 50px;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+        }
+
+        .carimg{
+            width: 30vw;
+        }
+
+        .carnav{
+            display: inline-block;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar 開始 -->
+    <nav class="navbar fixed-top navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><img src="img/logo.png" alt="" style="height: 40px;"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#concept" data-chinese="概念" data-english="Concept"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features" data-chinese="技術特色" data-english="Features"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#productline" data-chinese="產品系列" data-english="Product Line"></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#news" data-chinese="新聞資訊" data-english="News"></a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="#aboutus" data-chinese="關於我們" data-english="About Us"></a>
+                    </li> -->
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar 結束 -->
+
+    <!-- 首頁圖片 開始 -->
+    <div class="container-fluid" id="home">
+        <div class="row" style="display:flex; align-items: center; justify-content: center; width: 100%;">
+            <div class="col-8" style="display: flex; flex-direction: column; align-items: flex-start;">
+                <img src="img/only_logo.png" alt="" style="width: 10vw;">
+                <h1 style="color: #ffffff;">Silver Star Voyagers</h1>
+                <h3 style="color: #ffffff;">飛向宇宙，浩瀚無垠</h3>
+                <p style="color: #ffffff;">Lorem ipsum dolor sit amet consectetur. Vestibulum eu non tellus ultricies
+                    ut.Sit ornare mauriseu velit. <br>
+                    Augue purus nulla sit id tristique sed id. Nibh et posuere leo sem sit facilisi.</p>
+            </div>
+        </div>
+    </div>
+    <!-- 首頁圖片 結束 -->
+
+    <!-- 概念 開始 -->
+    <div class="container-fluid" id="concept" style="background-color: black; height: 100vh;">
+        <div class="row" style="display:flex; align-items: center; justify-content: center; width: 100%;">
+            <div class="col-8" style="display: flex; flex-direction: column; align-items: flex-start;">
+                <img src="img/only_logo.png" alt="" style="width: 10vw;">
+                <h1 style="color: #ffffff;">Silver Star Voyagers 概論</h1>
+                <h3 style="color: #ffffff;">飛向宇宙，浩瀚無垠</h3>
+                <p style="color: #ffffff;">
+                    開拓浩瀚星空，勇闖未知疆域，這是人類永恆的夢想。銀河航行者誕生於這個宏大理念，我們專注打造獨一無二的星艦艦船，助你在浩瀚宇宙中暢遊馳騁。無論是探索深淵奧祕，還是闖開殖民新天地，我們的艦船都將成為你的強力戰駒。<br><br>
+                    銀河航行者源自一群航太設計師的夢想與追求，希望能創造出具開創性的太空飛船。我們的團隊擁有豐富的航太工程經驗，更與時俱進，融合尖端科技與創新理念。我們深信，人類的未來就在浩瀚無垠的宇宙之中，而銀河航行者將是你邁向遼闊星際的勇敢先鋒。
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="div">
+        <img src="img/et.jpg" alt="" class="et">
+    </div>
+    <!-- 概念 結束 -->
+
+    <!-- 技術特色 開始 -->
+    <div class="container-fluid" id="features">
+        <div class="container-fluid cardbox">
+            <div class="container">
+                <h1 style="color: #fff;">Silver<br>Technical Features 技術特色</h1><br>
+                <p style="color: #fff;">
+                    銀河航行者自創的「曲率推進」技術，能夠突破傳統物理極限，實現超光速航行。同時我們獨家研發的「空間曲折儀」可直接操控亞空間通道，為你縮短遙遠的星際漂泊之旅。此外，我們的生命維護系統可確保船員長期航行安全，AI智能導航更能精準把握目的地航向，讓你盡情探索宇宙奧祕，無阻無礙。
+                </p>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="https://i.pinimg.com/736x/ad/c9/65/adc9652024c633291f357f5e91c917f3.jpg  "
+                                class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">空間曲折儀</h5>
+                                <h6>Curvature Propulsion Technology</h6>
+                                <p class="card-text">
+                                    銀河航行者自創的「曲率推進」技術，能夠突破物理極限實現超光速航行。<br>同時我們獨家研發的「空間曲折儀」可直接操控亞空間通道，為你縮短遙遠的星際漂泊之旅。此外，AI智能導航更能精準把握目的地航向，讓你盡情探索宇宙奧祕，無阻無礙。
+                                </p>
+                                <!-- <a href="#" class="btn btn-primary">了解詳情</a> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="https://i.pinimg.com/736x/aa/71/0a/aa710a5d75dc844a8f49f325cbd75292.jpg"
+                                class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">生命維護系統</h5>
+                                <h6>Life Support System</h6>
+                                <p class="card-text">
+                                    長期的星際航行對於人體無疑是一大考驗，然而銀河航行者的生命維護系統能為船員提供完美的生存環境。我們採用最先進的人造環境控制技術，為船上打造一個近似地球的高度可控生態系統，確保船員的身心健康。此外，還配有外星物種檢驗和隔離設施，防止生物潛入。
+                                </p>
+                                <!-- <a href="#" class="btn btn-primary">了解詳情</a> -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="https://i.pinimg.com/736x/fb/c5/45/fbc5458685c614443bdb2939d8a4c12d.jpg"
+                                class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">AI智能導航</h5>
+                                <h6>AI Intelligent Navigation</h6>
+                                <p class="card-text">
+                                    我們的AI智能導航系統融合了大數據、深度學習等尖端人工智能技術。<br>不僅能精準計算出最優秘的航線路徑，更可根據長期觀測預測各種天體的運行模式，指引飛船安全抵達目的地，讓你可以盡情探索宇宙的未知領域，全然不受未知風險的威脅。
+                                </p>
+                                <!-- <a href="#" class="btn btn-primary">了解詳情</a> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 技術特色 結束 -->
+
+    <!-- 產品系列 開始 -->
+    <div class="container-fluid" id="productline">
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-6">
+                        <h1>Silver Technical Features<br>產品系列</h1><br>
+                        <!-- <h3>About the products we make.</h3> -->
+                    </div>
+                    <div class="col-4"></div>
+                    <div class="col-1"></div>
+                </div>
+            </div>
+            <div class="contaner-fluid">
+                <div class="row car">
+                    <div class="col-1"></div>
+                    <div class="col-4">
+                        <div class="container">
+                            <h4>白鷗號星際旅行艦 (Albatross Starliner)</h4>
+                            <p>設計靈感源自海鷗的流線造型，整體外觀白色雅緻。這款豪華郵輪級星艦適合長途星際觀光之旅，有多種不同舷號可選。配備最頂級的曲率推進引擎和生命維護系統，保證乘客在旅程中體驗如家般的舒適感受。
+                            </p>
+                            <h4> 白羽號殖民艦 (White Plume Colonizer)</h4>
+                            <p>簡潔利落的外型，呈現銀白色金屬光澤。專為長途星際移民而設計，不僅具備居住艙和大規模物資艙，還配有高效的環境控制系統，可供殖民者在新的星球上重建家園。強大的AI導航系統可引導航向遙遠的目標星系。
+                            </p>
+                            <h4>白鷺號深空勘察艇 (Egret Explorer)</h4>
+                            <p>雪白流線機身，散發科技感十足的未來質感。這款中型星艦主打高機動性，專為探索未知深空奧秘而生。不僅有極強的探測和掃描能力，還有獨立的空間曲折儀系統，可快速穿梭各星系，力求第一個觸及新領域的榮耀。
+                            </p>
+                            <h4>黑鷲號虛空探測艇 (Raven Void Ranger)</h4>
+                            <p>造型前衛大器，外表漆黑如同永夜中盤旋的鷲隼。這款特種星艇冷酷霸氣，肩負虛空及亞空間領域的高難度探測任務。配備最強大的探測設備和武裝系統，連同空間曲折儀和AI導航，可自主深入高維位面執行各類特殊航行任務。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-5">
+                        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                                    aria-label="Slide 3"></button>
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                                    aria-label="Slide 4"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="img/car01.png" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>白鷗號星際旅行艦</h5>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/car02.png" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>白羽號殖民艦</h5>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/car03.png" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>白鷺號深空勘察艇</h5>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/car04.png" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>黑鷲號虛空探測艇 </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 產品系列 結束 -->
+
+    <!-- 產品系列 beta start -->
+    <div class="container-fluid" id="productline">
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-6">
+                        <h1>Silver Technical Features<br>產品系列</h1><br><br>
+                        <!-- <h3>About the products we make.</h3> -->
+                    </div>
+                    <div class="col-4"></div>
+                    <div class="col-1"></div>
+                </div>
+            </div>
+            <div class="contaner-fluid">
+                <!-- <div class="row car">
+                    <div class="col-1"></div>
+                    <div class="col-4">
+                        <div class="container">
+                            <h4>白鷗號星際旅行艦 (Albatross Starliner)</h4>
+                            <p>設計靈感源自海鷗的流線造型，整體外觀白色雅緻。這款豪華郵輪級星艦適合長途星際觀光之旅，有多種不同舷號可選。配備最頂級的曲率推進引擎和生命維護系統，保證乘客在旅程中體驗如家般的舒適感受。
+                            </p>
+                            <h4> 白羽號殖民艦 (White Plume Colonizer)</h4>
+                            <p>簡潔利落的外型，呈現銀白色金屬光澤。專為長途星際移民而設計，不僅具備居住艙和大規模物資艙，還配有高效的環境控制系統，可供殖民者在新的星球上重建家園。強大的AI導航系統可引導航向遙遠的目標星系。
+                            </p>
+                            <h4>白鷺號深空勘察艇 (Egret Explorer)</h4>
+                            <p>雪白流線機身，散發科技感十足的未來質感。這款中型星艦主打高機動性，專為探索未知深空奧秘而生。不僅有極強的探測和掃描能力，還有獨立的空間曲折儀系統，可快速穿梭各星系，力求第一個觸及新領域的榮耀。
+                            </p>
+                            <h4>黑鷲號虛空探測艇 (Raven Void Ranger)</h4>
+                            <p>造型前衛大器，外表漆黑如同永夜中盤旋的鷲隼。這款特種星艇冷酷霸氣，肩負虛空及亞空間領域的高難度探測任務。配備最強大的探測設備和武裝系統，連同空間曲折儀和AI導航，可自主深入高維位面執行各類特殊航行任務。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-5">
+                        <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
+                                    class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                                    aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                                    aria-label="Slide 3"></button>
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3"
+                                    aria-label="Slide 4"></button>
+                            </div>
+                            <div class="carousel-inner">
+                                <div class="carousel-item active">
+                                    <img src="img/car01.png" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>白鷗號星際旅行艦</h5>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/car02.png" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>白羽號殖民艦</h5>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/car03.png" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>白鷺號深空勘察艇</h5>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="img/car04.png" class="d-block w-100" alt="...">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>黑鷲號虛空探測艇 </h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button"
+                                data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-1"></div>
+                </div> -->
+                <div class="container">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+                                aria-orientation="vertical">
+                                <a class="nav-link carnav active" id="v-pills-home-tab" data-bs-toggle="pill"
+                                    href="#v-pills-car1" role="tab" aria-controls="v-pills-home" aria-selected="true">
+                                    <h6>白鷗號星際旅行艦</h6>
+                                    <p>(Albatross Starliner)</p>
+                                </a>
+                                <a class="nav-link carnav" id="v-pills-profile-tab" data-bs-toggle="pill" href="#v-pills-car2"
+                                    role="tab" aria-controls="v-pills-profile" aria-selected="false">
+                                    <h6>白羽號殖民艦</h6>
+                                    <p>(White Plume Colonizer)</p>
+                                </a>
+                                <a class="nav-link carnav" id="v-pills-messages-tab" data-bs-toggle="pill" href="#v-pills-car3"
+                                    role="tab" aria-controls="v-pills-messages" aria-selected="false">
+                                    <h6>白鷺號深空勘察艇</h6>
+                                    <p>(Egret Explorer)</p>
+                                </a>
+                                <a class="nav-link carnav" id="v-pills-settings-tab" data-bs-toggle="pill" href="#v-pills-car4"
+                                    role="tab" aria-controls="v-pills-settings" aria-selected="false">
+                                    <h6>黑鷲號虛空探測艇</h6>
+                                    <p>(Raven Void Ranger)</p>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div class="tab-content" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active" id="v-pills-car1" role="tabpanel"
+                                    aria-labelledby="v-pills-car1-tab">
+                                    <div class="row">
+                                        <div class="col-7"><img src="img/car01.png" alt="" class="carimg"></div>
+                                        <div class="col-5">
+                                            <p>設計靈感源自海鷗的流線造型，整體外觀白色雅緻。這款豪華郵輪級星艦適合長途星際觀光之旅，有多種不同舷號可選。配備最頂級的曲率推進引擎和生命維護系統，保證乘客在旅程中體驗如家般的舒適感受。
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-car2" role="tabpanel"
+                                    aria-labelledby="v-pills-car2-tab">
+                                    <div class="row">
+                                        <div class="col-7"><img src="img/car02.png" alt="" class="carimg"></div>
+                                        <div class="col-5">
+                                            <p>簡潔利落的外型，呈現銀白色金屬光澤。專為長途星際移民而設計，不僅具備居住艙和大規模物資艙，還配有高效的環境控制系統，可供殖民者在新的星球上重建家園。強大的AI導航系統可引導航向遙遠的目標星系。
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-car3" role="tabpanel"
+                                    aria-labelledby="v-pills-car3-tab">
+                                    <div class="row">
+                                        <div class="col-7"><img src="img/car03.png" alt="" class="carimg"></div>
+                                        <div class="col-5">
+                                            <p>雪白流線機身，散發科技感十足的未來質感。這款中型星艦主打高機動性，專為探索未知深空奧秘而生。不僅有極強的探測和掃描能力，還有獨立的空間曲折儀系統，可快速穿梭各星系，力求第一個觸及新領域的榮耀。
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-car4" role="tabpanel"
+                                    aria-labelledby="v-pills-car4-tab">
+                                    <div class="row">
+                                        <div class="col-7"><img src="img/car04.png" alt="" class="carimg"></div>
+                                        <div class="col-5">
+                                            <p>造型前衛大器，外表漆黑如同永夜中盤旋的鷲隼。這款特種星艇冷酷霸氣，肩負虛空及亞空間領域的高難度探測任務。配備最強大的探測設備和武裝系統，連同空間曲折儀和AI導航，可自主深入高維位面執行各類特殊航行任務。
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+    </div>
+    <!-- 產品系列 beta end -->
+
+    <!-- 新聞資訊 開始 -->
+    <div class="container-fluid" id="news">
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col-6">
+                    </div>
+                    <div class="col-4">
+                        <h1 style="color: #fff;">Silver News<br>新聞資訊</h1><br>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+                <div class="col-4"></div>
+                <div class="col-1"></div>
+            </div>
+            <div class="contaner-fluid">
+                <div class="row news">
+                    <div class="col-1"></div>
+                    <div class="col-5">
+                        <img src="img/news.png" alt="" width="100%">
+                        <p style="color: #fff;"><br>▲ 諾貝爾獎頒獎典禮現場拍攝 - 得獎製作團隊 攝：黃人勛</p>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-4">
+                        <h3 style="color: #fff;">銀河航行者公佈史詩級星艦設計<br>人類星際探索明日開放</h3>
+                        <p style="color: #fff;">Human interstellar exploration opens tomorrow</p>
+                        <p style="color: #fff;">
+                            航太科技龍頭銀河航行者日前公佈了其最新旗艦產品「英雄號」的設計藍圖，這款號稱「史詩級」的星艦突破性地將曲率推進、空間曲折、生命維護和AI智能導航等頂尖技術完美融合，標誌著人類星際探索能力邁上新的里程碑。<BR><BR>
+                            英雄號不僅體積浩大，容量達百萬噸級，更具備可支援數十萬人長期生存的環境。按照預計，這款史詩級星艦一旦問世，將開啟人類進軍太空、對整個銀河系乃至更遠星系進行深度探索和移民擴張的全新紀元。航天專家表示，英雄號的面世象徵著人類離開地球尋找新故鄉的夢想，終於可能就要在未來數十年內實現。
+                        </p>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 新聞資訊 結束 -->
+
+    <!-- 關於我們 開始 -->
+    <!-- <div class="container-fluid" id="aboutus">
+
+    </div> -->
+    <!-- 關於我們 結束 -->
+
+    <!-- footer 開始 -->
+    <footer class="footer">
+        <small>版權所有 © 2484 Silver Voyagers 保留所有權利</small>
+    </footer>
+    <!-- footer 結束 -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+        </script>
+    <script>
+        let lastPos = 0;
+        const nav = document.querySelector('nav');
+
+        // 設置過場動畫時間
+        nav.style.transition = "top 0.3s";
+
+        // 監聽scroll事件
+        document.addEventListener('scroll', function () {
+            let currentPos = window.scrollY;
+            // 往下滑
+            if (currentPos > lastPos) {
+                nav.style.top = "-70px"; //讓navbar消失
+            } else {
+                nav.style.top = "0px"; //讓navbar出現
+            }
+            lastPos = currentPos; //再記住現在位置，跟未來的位置做比較
+        });
+
+    </script>
+</body>
+
+</html>
